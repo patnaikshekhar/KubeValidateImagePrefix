@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-validation
+  namespace: development
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-validation
+  template:
+    metadata:
+      labels:
+        app: pod-validation
+    spec:
+      containers:
+      - image: patnaikshekhar/validatingwebhookexample:v1alpha10
+        name: main
+        env:
+        - name: PREFIX
+          value: patnaikshekhar
+        volumeMounts:
+        - name: certs
+          mountPath: /app/certs
+      volumes:
+      - name: certs
+        secret:
+          secretName: pod-validation-secret

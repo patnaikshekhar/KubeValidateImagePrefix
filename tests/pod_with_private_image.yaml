@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-private-image
+spec:
+  containers:
+  - image: patnaikshekhar/learnkubereadiness:1
+    name: main
